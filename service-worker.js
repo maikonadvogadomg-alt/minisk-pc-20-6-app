@@ -1,30 +1,30 @@
-// service-worker.js — gerado pelo Mini SK em 18/11/2026, 17:38:24
+// service-worker.js — gerado pelo Mini SK em 23/11/2026, 11:22:18
 // Não precisa mexer: ele guarda sozinho o que o app usa.
 const PREFIXO = 'sk-minisk-pc-20-6-';
-const CACHE = PREFIXO + 'mwml2ts2';
+const CACHE = PREFIXO + 'mwtcuf06';
 // Lista feita automaticamente (para funcionar sem internet logo após instalar)
 const GUARDAR = [
   "./",
   "./app/css/app.css",
-  "./app/favicon.ico",
   "./app/ferramentas/banco-neon.html",
-  "./app/icons/apple-touch-icon.png",
-  "./app/icons/icon-16.png",
-  "./app/icons/icon-32.png",
-  "./app/icons/icon-48.png",
-  "./app/icons/icon-72.png",
-  "./app/icons/icon-96.png",
-  "./app/icons/icon-128.png",
-  "./app/icons/icon-144.png",
-  "./app/icons/icon-152.png",
-  "./app/icons/icon-180.png",
+  "./app/ferramentas/cloud/analisador-v2.html",
+  "./app/ferramentas/cloud/analisador.html",
+  "./app/ferramentas/cloud/caca-sql.html",
+  "./app/ferramentas/cloud/cofre-config.html",
+  "./app/ferramentas/cloud/colecionador-codigo.html",
+  "./app/ferramentas/cloud/comandos-termux.html",
+  "./app/ferramentas/cloud/conversor-imagem.html",
+  "./app/ferramentas/cloud/desmontador-backup.html",
+  "./app/ferramentas/cloud/detector-api.html",
+  "./app/ferramentas/cloud/divisor-html.html",
+  "./app/ferramentas/cloud/juntador.html",
+  "./app/ferramentas/cloud/leitor-universal.html",
+  "./app/ferramentas/cloud/monica-guia.html",
+  "./app/ferramentas/cloud/monica-passo.html",
+  "./app/ferramentas/cloud/montador-modulos.html",
+  "./app/ferramentas/cloud/procurar-substituir.html",
   "./app/icons/icon-192.png",
-  "./app/icons/icon-384.png",
   "./app/icons/icon-512.png",
-  "./app/icons/icon.svg",
-  "./app/icons/maskable-192.png",
-  "./app/icons/maskable-512.png",
-  "./app/icons/maskable.svg",
   "./app/index.html",
   "./app/js/00-core.js",
   "./app/js/04-conta.js",
@@ -53,8 +53,11 @@ const GUARDAR = [
   "./app/js/86g-saude-pc.js",
   "./app/js/86h-navegador.js",
   "./app/js/86h-node-extra.js",
+  "./app/js/86i-comandos-cb.js",
   "./app/js/87-banco.js",
   "./app/js/87-links.js",
+  "./app/js/87b-esquema.js",
+  "./app/js/87c-ferramentas.js",
   "./app/js/88-inventario.js",
   "./app/js/89-config.js",
   "./app/js/89b-cacador.js",
@@ -101,7 +104,6 @@ const GUARDAR = [
   "./app/LEIA-ME.md",
   "./app/manifest.json",
   "./app/README.md",
-  "./app/service-worker.js",
   "./app/sw.js",
   "./electron/faxina.cjs",
   "./electron/instalar.nsh",
@@ -134,9 +136,7 @@ const GUARDAR = [
   "./index.html",
   "./LEIA-ME.md",
   "./manifest.json",
-  "./package.json",
-  "./PLANO.md",
-  "./RECEITA.md"
+  "./package.json"
 ];
 
 self.addEventListener('install', (e) => {

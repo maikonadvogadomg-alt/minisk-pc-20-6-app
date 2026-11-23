@@ -24,7 +24,7 @@
     { id: 'xai', label: 'xAI (Grok)', prefix: 'xai-', kind: 'openai', base: 'https://api.x.ai/v1', model: 'grok-3-mini', site: 'https://console.x.ai' },
     { id: 'perplexity', label: 'Perplexity', prefix: 'pplx-', kind: 'openai', base: 'https://api.perplexity.ai', model: 'sonar', site: 'https://www.perplexity.ai/settings/api' },
     { id: 'openai', label: 'OpenAI (GPT)', prefix: 'sk-', kind: 'openai', base: 'https://api.openai.com/v1', model: 'gpt-4o-mini', site: 'https://platform.openai.com/api-keys' },
-    { id: 'monica', label: 'Monica (saldo de API, separado da assinatura)', prefix: '', kind: 'openai', base: 'https://openapi.monica.im/v1', model: 'claude-haiku-4-5', site: 'https://platform.monica.im' },
+    { id: 'monica', label: 'Monica (saldo de API, separado da assinatura)', prefix: '', kind: 'openai', base: 'https://openapi.monica.im/v1', model: 'gpt-4o', site: 'https://platform.monica.im' },
     { id: 'ollama', label: 'Ollama (no seu PC, grátis — sem chave)', prefix: '', kind: 'openai', base: 'http://127.0.0.1:11434/v1', model: 'llama3.2', site: 'https://ollama.com/download', semChave: true },
     { id: 'custom', label: 'Outro (compatível com OpenAI)', prefix: '', kind: 'openai', base: '', model: '', site: '' },
   ];
@@ -133,7 +133,17 @@
       names = ((await r.json()).models || []).filter((m) => (m.supportedGenerationMethods || []).includes('generateContent')).map((m) => m.name.replace(/^models\//, ''));
     } else {
       const base = (k.base || preset.base).replace(/\/+$/, '');
-      const r = await fetch(base + '/models', { headers: { Authorization: 'Bearer ' + (k.key || 'sem-chave') } });
+      let r = await fetch(base + '/models', { headers: { Authorization: 'Bearer ' + (k.key || 'sem-chave') } });
+      // 🟣 23/11: chave "sk-…" que a OpenAI recusou pode ser da MONICA → testa lá e troca sozinho
+      if ((r.status === 401 || r.status === 403) && preset.id === 'openai' && /^sk-/.test(k.key || '')) {
+        const mo = PRESETS.find((p) => p.id === 'monica'); const r2 = await fetch(mo.base + '/models', { headers: { Authorization: 'Bearer ' + k.key } }).catch(() => null);
+        const r3 = r2 && r2.ok ? r2 : await fetch(mo.base + '/chat/completions', { method: 'POST', headers: { Authorization: 'Bearer ' + k.key, 'content-type': 'application/json' }, body: JSON.stringify({ model: 'gpt-4o', max_tokens: 5, messages: [{ role: 'user', content: 'oi' }] }) }).catch(() => null);
+        if (r3 && r3.ok) { k.preset = 'monica'; k.base = ''; if (!k.model || /^gpt-4o-mini$/.test(k.model)) k.model = 'gpt-4o'; SK.toast && SK.toast('🟣 Essa chave é da Monica — troquei sozinho.'); if (r2 && r2.ok) r = r2; else return ['gpt-4o']; }
+      }
+      if (!r.ok && preset.id === 'monica') { // a Monica pode não ter a lista: confere com uma pergunta pequenininha
+        const r3 = await fetch(base + '/chat/completions', { method: 'POST', headers: { Authorization: 'Bearer ' + k.key, 'content-type': 'application/json' }, body: JSON.stringify({ model: 'gpt-4o', max_tokens: 5, messages: [{ role: 'user', content: 'oi' }] }) });
+        if (!r3.ok) throw new Error(await errorText(r3)); return ['gpt-4o'];
+      }
       if (!r.ok) throw new Error(await errorText(r));
       const d = await r.json();
       names = (d.data || d.models || []).map((m) => m.id || m.name).filter(Boolean);

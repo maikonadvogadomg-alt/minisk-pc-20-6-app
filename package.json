@@ -18,9 +18,9 @@
     "electron-builder": "25.1.8"
   },
   "build": {
-    "appId": "com.maikon.minisk.pc.nteste11182038",
-    "productName": "Mini SK (teste 11182038)",
-    "executableName": "Mini-SK-nteste11182038",
+    "appId": "com.maikon.minisk.pc",
+    "productName": "Mini SK",
+    "executableName": "Mini-SK",
     "directories": {
       "output": "release"
     },
@@ -42,13 +42,12 @@
       "perMachine": false,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Mini SK (teste 11182038)",
-      "artifactName": "Mini-SK-nteste11182038-Instalar.exe",
+      "shortcutName": "Mini SK",
+      "artifactName": "Mini-SK-Instalar.exe",
       "include": "electron/instalar.nsh"
     },
     "portable": {
-      "artifactName": "Mini-SK-nteste11182038-sem-instalar.exe"
+      "artifactName": "Mini-SK-sem-instalar.exe"
     }
-  },
-  "portaDoPrograma": 10107
+  }
 }

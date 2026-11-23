@@ -1,6 +1,6 @@
 # Mini SK — documentação
 
-> Versão **18/11-C** · documentação gerada em 18/11/2026. Feita para o dono LER e para QUALQUER IA entender o projeto sem ler o código inteiro (mais barato e com menos erro). Para mexer numa parte, a IA abre só o arquivo dela (veja o mapa no fim).
+> Versão **20/11-C** · documentação gerada em 20/11/2026. Feita para o dono LER e para QUALQUER IA entender o projeto sem ler o código inteiro (mais barato e com menos erro). Para mexer numa parte, a IA abre só o arquivo dela (veja o mapa no fim).
 
 ## 📌 O que é
 O **editor principal** do Maikon: abrir, mexer, consertar, rodar e **PUBLICAR** projetos grandes (APK, site, .exe). Tem terminal de verdade. Celular (PWA/APK) e PC (.exe Electron, porta 7680).
@@ -31,6 +31,7 @@ Objeto global **`SK`** (`SK.ai`, `SK.fs`, `SK.pref`, `SK.toast`…). `99-app.js`
 
 ## 🧰 Ferramentas que vêm dentro
 - `ferramentas/banco-neon.html` — Banco de Dados (Neon)
+- `ferramentas/cloud/` — app inteiro aqui dentro
 
 ## 🗺 Mapa dos arquivos (tirado do cabeçalho de cada arquivo)
 | Arquivo | O que faz |
@@ -62,8 +63,11 @@ Objeto global **`SK`** (`SK.ai`, `SK.fs`, `SK.pref`, `SK.toast`…). `99-app.js`
 | `js/86g-saude-pc.js` | 🩺 Saúde do computador (só no Mini SK para PC). Um toque: mostra discos, memória, quem está usando cada porta, as peças instaladas (Node, npm, Git, Ollama), o tamanho das pastas dos projetos e o que dá para limpar. Faz backup dos projetos para outra pasta / HD externo. Também tem os botões 📱 Cara de celular / 💻 Tela grande para a janela. |
 | `js/86h-navegador.js` | 🌐 Navegador de verdade — abre QUALQUER site sem sair do Mini SK (YouTube, GitHub, npm, Neon, Expo…). - 📦 no APK: é o navegador do próprio Android (AndroidBridge.navegar), com ◀ ▶, endereço e o voltar do celular. - 💻 no Mini SK para PC: uma janela de navegador própria (miniskPC.navegador). - 🌍 no PWA (navegador comum): os sites grandes proíbem aparecer dentro de outra página, então ele abre numa aba nova (isso é uma t… |
 | `js/86h-node-extra.js` | Botões a mais no ⚡ Node (peça separada: se der problema, o Node continua igual): 🔗 Árvore ligada — o que o Node cria/muda (dist, arquivos novos) aparece sozinho na árvore 🤖 Chamar a IA · 🦙 Usar o Ollama · 👁 Ver na tela o que o npm run dev ligou |
+| `js/86i-comandos-cb.js` | ⚡ OS BOTÕES DO CAÇA-BUG DENTRO DO MINI SK (20/11) Os mesmos comandos prontos do terminal do Caça-Bug, num toque, rodando NA PASTA DO PROJETO: 📦 npm install · 🏗 build · 🔢 versões · 📋 npm list · ⏫ desatualizados · 🛡 falhas · 🧪 testes · 🧹 pacotes sem uso 🐙 git status/log/diff · 📦 o que pesa · 🐘 arquivos grandes · 🗑 restos da Replit · 🧾 logs · 🔑 senhas esquecidas 🚀 Publicar na Vercel/Netlify (escreve o arquivo de configu… |
 | `js/87-banco.js` | 🗄 Banco de Dados (Neon) dentro do Mini SK (17/11) Abre a mesma ferramenta do jurídico e do Laboratório numa tela por cima. Para os seus projetos que têm banco: ver tabelas, criar, acrescentar campo, baixar tudo. O endereço do Neon (tem a senha) fica só neste aparelho. |
 | `js/87-links.js` | 🔗 Meus Links: guarda os endereços dos seus PWAs e sites num lugar só (eles não somem como os "instalados" que o celular apaga). - Colar um ou vários links de uma vez; nome e ícone automáticos. - Pastas (categorias), busca, abrir, copiar, editar, apagar. - ☁️ Vai junto para a sua conta (se a nuvem estiver ligada). - 📲 Gera uma PÁGINA própria com todos os links, para instalar como app. - 💬 Colar conversa (ex.: exportad… |
+| `js/87b-esquema.js` | 📐 ESQUEMA DO PROJETO + 🏷 TECNOLOGIAS (20/11) Lê o projeto aberto (sem IA, sem gastar nada) e: 🏷 mostra as tecnologias que ele usa, em etiquetas coloridas (React, Express, SQLite, Neon…), como o CodeLens da Replit, e o comando para instalar o que ele pede; 📐 acha as tabelas que o CÓDIGO espera (Drizzle shared/schema.ts, Prisma, arquivos .sql) e monta o comando que CRIA essas tabelas do jeito certo (create table if not… |
+| `js/87c-ferramentas.js` | 🧰 FERRAMENTAS SEM IA (20/11) As ferramentas que o outro Claude fez (divisor, juntador, conversor de imagem, leitor universal…) agora moram DENTRO do Mini SK: tocou, abre por cima, sem gastar nada de IA. ✕ volta para o editor. |
 | `js/88-inventario.js` | 📚 Inventário dos seus códigos: joga vários .html/.js (ou .zip com eles) e ele diz, de cada um, O QUE FAZ e O QUE USA — para saber o que dá para aproveitar, o que está repetido e qual versão é a mais completa. - Lê sem IA (direto do código): título, tamanho, linhas, botões e títulos da tela, bibliotecas, e recursos (IA, voz, PDF, Word, ZIP, OCR, GitHub, Banco Central, DJEN/CNJ, banco online, salvar no aparelho…). - Ju… |
 | `js/89-config.js` | ⚙️ Configuração: 🔑 Cofre de chaves (IA, GitHub e "Minhas chaves"). Tudo guardado SÓ neste aparelho. Sem login, sem nuvem. |
 | `js/89b-cacador.js` | 🐞 CAÇADOR DE ERROS (para qualquer app que você rodar aqui) Junta num lugar só os erros da PRÉVIA (tela), das chamadas ao SERVIDOR e dos TERMINAIS (⚡ Node, 📱 Termux, 💻 PC). Diz em português se é normal, configuração ou defeito do projeto. Copiar · baixar .md · mandar para a IA. O botão 🐞 vermelho aparece sozinho quando acontece um erro. |

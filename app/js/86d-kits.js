@@ -4,6 +4,8 @@
    🔗 Juntar   → transforma o projeto (index.html + css + js) num HTML ÚNICO e traz de volta para a árvore.
    🌐 Servir   → abre um app JÁ MONTADO (pasta dist/www/build) como a Replit abre (sem tela branca).
    🚀 Forçar abrir → projeto com SERVIDOR (package.json, Node/Express da Replit): instala, liga e mostra.
+                     20/11: NÃO força mais a porta 5000 — o SK Jurídico 1.7.6 liga o servidor na 8080 e a tela na 5173
+                     (forçar a 5000 separava os dois e dava erro de fetch em tudo; no Caça-Bug funcionava por isso).
                      Se o projeto usa banco (DATABASE_URL), pergunta o endereço do Neon (fica só aqui).
    🗂 Organizar o celular → o organizador (só no Termux). Nada é apagado sozinho. */
 (function (SK) {
@@ -48,10 +50,10 @@
     const rodar = scripts.dev ? 'npm run dev' : scripts.start ? 'npm start' : 'node .';
     const db = scripts['db:push'] ? 'npm run db:push' : '';
     let cmd;
-    if (WIN) cmd = 'cd /d ' + q(pasta) + ' && set PORT=5000&& set NODE_ENV=development&& ' + (banco ? 'set "DATABASE_URL=' + banco + '"&& ' : '') + 'npm install --no-audit --no-fund && ' + (banco && db ? db + ' && ' : '') + rodar;
-    else cmd = 'cd ' + q(pasta) + ' && export PORT=5000 NODE_ENV=development' + (banco ? " DATABASE_URL='" + banco.replace(/'/g, '') + "'" : '') + ' && npm install --no-audit --no-fund && ' + (banco && db ? db + ' && ' : '') + rodar + ' || echo "⚠ O servidor parou. Toque em 🤖 Perguntar à IA para ela ler o erro."';
+    if (WIN) cmd = 'cd /d ' + q(pasta) + ' && set NODE_ENV=development&& ' + (banco ? 'set "DATABASE_URL=' + banco + '"&& ' : '') + 'npm install --no-audit --no-fund && ' + (banco && db ? db + ' && ' : '') + rodar;
+    else cmd = 'cd ' + q(pasta) + ' && export NODE_ENV=development' + (banco ? " DATABASE_URL='" + banco.replace(/'/g, '') + "'" : '') + ' && npm install --no-audit --no-fund && ' + (banco && db ? db + ' && ' : '') + rodar + ' || echo "⚠ O servidor parou. Toque em 🤖 Perguntar à IA para ela ler o erro."';
     T().mandar(cmd);
-    return '🚀 Instalando e ligando (a 1ª vez demora uns minutos). Quando aparecer a porta (ex.: 5000), toque em 👁 Ver.' + (usaBanco() && !banco ? ' ⚠ Sem banco: se der "Failed to fetch", é ele.' : '');
+    return '🚀 Instalando e ligando (a 1ª vez demora uns minutos). Quando aparecer a porta (ex.: 5173 ou 5000), toque em 👁 Ver nessa porta.' + (usaBanco() && !banco ? ' ⚠ Sem banco: se der "Failed to fetch", é ele.' : '');
   }
   async function organizar() {
     if (PC) throw new Error('O organizador é para o celular (Termux).');

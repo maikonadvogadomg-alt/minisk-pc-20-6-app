@@ -3,30 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
-<title>Mini SK</title>
-<link rel="stylesheet" href="css/app.css">
-  <!-- PWA:inicio (gerado pelo Mini SK — pode refazer no painel 📱 PWA) -->
+  <meta name="theme-color" content="#0f1420">
+  <title>Mini SK</title>
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Mini SK">
-  <link rel="icon" href="favicon.ico" sizes="any">
-  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <script>
-    if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
-      addEventListener('load', function () { navigator.serviceWorker.register('service-worker.js').catch(function (e) { console.warn('Service worker:', e); }); });
-    }
-  </script>
-  <!-- PWA:fim -->
+  <meta name="theme-color" content="#0f1420">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
   <header id="top">
     <button class="icon-btn" id="btn-tree" title="Arquivos (Ctrl+B)" aria-label="Mostrar ou esconder arquivos">☰</button>
     <button class="proj-name" id="proj-name" title="Trocar de projeto">Mini SK</button>
-    <span class="versao-chip" id="versao-chip" title="Versão do Mini SK">v18/11-C</span>
+    <span class="versao-chip" id="versao-chip" title="Versão do Mini SK">v23/11-B</span>
     <span class="save-ind" id="save-ind" aria-live="polite"></span>
     <button class="icon-btn rolar" id="top-esq" title="Ver os botões da esquerda" aria-label="Rolar para a esquerda">◀</button>
     <nav class="top-tools" aria-label="Painéis">
@@ -100,6 +88,7 @@
   <script src="js/86h-node-extra.js"></script>
   <script src="js/86c-termux.js"></script>
   <script src="js/86d-kits.js"></script>
+  <script src="js/86i-comandos-cb.js"></script>
   <script src="js/86f-pasta-viva.js"></script>
   <script src="js/86g-saude-pc.js"></script>
   <script src="js/86h-navegador.js"></script>
@@ -144,6 +133,8 @@
 <script src="js/98b-rotas.js"></script>
 <script src="js/98c-montar.js"></script>
   <script src="js/87-banco.js"></script>
+  <script src="js/87b-esquema.js"></script>
+  <script src="js/87c-ferramentas.js"></script>
   <script src="js/99-app.js"></script>
 <script>window.TEMA_APP = { id: 'minisk', barra: '#top', padrao: 'escuro', classe: 'icon-btn', antesDe: '#top-dir', cores: {
   escuro: null,

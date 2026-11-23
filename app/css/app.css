@@ -1,3 +1,6 @@
+/* 23/11: SEM "ESTICAR IGUAL CHICLETE" — o Android estica a tela quando passa da ponta (e às vezes trava esticado). Isto desliga em tudo. */
+html, body, * { overscroll-behavior: none; }
+
 /* =========================================================================
    Mini SK — app.css   (tema escuro, celular e computador)
    ========================================================================= */
